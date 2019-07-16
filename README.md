@@ -24,7 +24,7 @@ black:
   stage: linting
   image: pipelinecomponents/black:latest
   script:
-	 - black --check --verbose -- .
+    - black --check --verbose -- .
 ```
 
 ## Versioning
