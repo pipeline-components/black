@@ -13,7 +13,7 @@ inputs:
   options:
     description: "Additional options"
     required: false
-    default: "--check --verbose"
+    default: "--fast --check --verbose"
 runs:
   using: "docker"
   image: docker://pipelinecomponents/black
