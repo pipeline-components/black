@@ -1,4 +1,10 @@
-FROM python:3.7.3-alpine3.10
+FROM pipelinecomponents/base-entrypoint:0.2.0 as entrypoint
+
+FROM python:3.7.5-alpine3.10
+COPY --from=entrypoint /entrypoint.sh /entrypoint.sh
+ENTRYPOINT ["/entrypoint.sh"]
+ENV DEFAULTCMD black
+
 
 WORKDIR /app/
 
@@ -8,7 +14,7 @@ COPY app /app/
 # Python
 RUN pip install --no-cache-dir -r requirements.txt
 
-WORKDIR /code/ 
+WORKDIR /code/
 
 # Build arguments
 ARG BUILD_DATE
