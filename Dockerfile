@@ -5,14 +5,18 @@ COPY --from=entrypoint /entrypoint.sh /entrypoint.sh
 ENTRYPOINT ["/entrypoint.sh"]
 ENV DEFAULTCMD black
 
-
 WORKDIR /app/
 
 # Generic
 COPY app /app/
 
 # Python
-RUN pip install --no-cache-dir -r requirements.txt
+RUN apk --no-cache add --virtual .build \
+    build-base=0.5-r1 \
+	 && \
+    pip install --no-cache-dir -r requirements.txt \
+	 && \
+    apk --no-cache del .build
 
 WORKDIR /code/
 
