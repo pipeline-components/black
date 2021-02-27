@@ -22,7 +22,7 @@ The image is based on alpine:3.8.
 ```yaml
 black:
   stage: linting
-  image: pipelinecomponents/black:latest
+  image: registry.gitlab.com/pipeline-components/black:latest
   script:
     - black --check --verbose -- .
 ```
