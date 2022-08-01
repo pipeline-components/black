@@ -1,26 +1,46 @@
+# ==============================================================================
+# Add https://gitlab.com/pipeline-components/org/base-entrypoint
+# ------------------------------------------------------------------------------
 FROM pipelinecomponents/base-entrypoint:0.5.0 as entrypoint
 
+# ==============================================================================
+# Build process
+# ------------------------------------------------------------------------------
+FROM python:3.8.3-alpine3.10 as build
+ENV PYTHONUSERBASE /app
+ENV PATH "$PATH:/app/bin/"
+
+WORKDIR /app/
+COPY app /app/
+
+# Adding dependencies
+# hadolint ignore=DL3018
+RUN \
+    apk add --no-cache build-base && \
+# hadolint ignore=DL3013
+    pip3 install --user --no-cache-dir --prefer-binary -r requirements.txt
+
+# ==============================================================================
+# Component specific
+# ------------------------------------------------------------------------------
 FROM python:3.8.3-alpine3.10
+
+ENV PATH "$PATH:/app/bin/"
+ENV PYTHONUSERBASE /app
+COPY --from=build /app /app
+
+# ==============================================================================
+# Generic for all components
+# ------------------------------------------------------------------------------
 COPY --from=entrypoint /entrypoint.sh /entrypoint.sh
 ENTRYPOINT ["/entrypoint.sh"]
 ENV DEFAULTCMD black
 
-WORKDIR /app/
-
-# Generic
-COPY app /app/
-
-# Python
-RUN apk --no-cache add --virtual .build \
-    build-base=0.5-r1 \
-	 && \
-    pip install --no-cache-dir -r requirements.txt \
-	 && \
-    apk --no-cache del .build
-
 WORKDIR /code/
 
-# Build arguments
+# ==============================================================================
+# Container meta information
+# ------------------------------------------------------------------------------
 ARG BUILD_DATE
 ARG BUILD_REF
 
