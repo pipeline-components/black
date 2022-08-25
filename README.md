@@ -8,8 +8,6 @@
 
 ## Docker status
 
-[![Docker Version][version-shield]][microbadger]
-[![Docker Layers][layers-shield]][microbadger]
 [![Docker Pulls][pulls-shield]][dockerhub]
 
 ## Usage
@@ -92,15 +90,12 @@ SOFTWARE.
 [gitlabci]: https://gitlab.com/pipeline-components/black/-/commits/master
 [issue]: https://gitlab.com/pipeline-components/black/issues
 [keepchangelog]: http://keepachangelog.com/en/1.0.0/
-[layers-shield]: https://images.microbadger.com/badges/image/pipelinecomponents/black.svg
 [maintenance-shield]: https://img.shields.io/maintenance/yes/2022.svg
-[microbadger]: https://microbadger.com/images/pipelinecomponents/black
 [project-stage-shield]: https://img.shields.io/badge/project%20stage-production%20ready-brightgreen.svg
 [pulls-shield]: https://img.shields.io/docker/pulls/pipelinecomponents/black.svg
 [releases]: https://gitlab.com/pipeline-components/black/tags
 [repository]: https://gitlab.com/pipeline-components/black
 [semver]: http://semver.org/spec/v2.0.0.html
-[version-shield]: https://images.microbadger.com/badges/version/pipelinecomponents/black.svg
 
 [frenck]: https://github.com/frenck
 [hassio-addons]: https://github.com/hassio-addons
